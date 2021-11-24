@@ -1,0 +1,4 @@
+export { default as Home } from './home/Home'
+export { default as AddRecipe } from './add-recipe/AddRecipe'
+export { default as SingleRecipe } from './single-recipe/SingleRecipe'
+export { default as Search } from './search/Search'
