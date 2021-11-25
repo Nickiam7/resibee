@@ -10,12 +10,14 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/abeezee": "^0.2.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^5.x",
     "@react-navigation/native": "^5.x",
     "@react-navigation/stack": "^5.x",
     "babel-plugin-module-resolver": "^4.1.0",
     "expo": "~43.0.2",
+    "expo-font": "~10.0.3",
     "expo-status-bar": "~1.1.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",

@@ -2,11 +2,11 @@ import React from 'react'
 
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 import { AddRecipe, Search } from '@screens'
-
-import { RecipeStackNavigation } from '@navigation'
+import RecipeStackNavigation from './RecipeStack'
 
 const BottomTab = createBottomTabNavigator();
 
@@ -15,25 +15,24 @@ const BottomTabNavigation = () => {
     <NavigationContainer>
       <BottomTab.Navigator
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+          tabBarIcon: ({ color, size }) => {
+            let iconName
 
             if (route.name === 'Home') {
-              iconName = focused
-                ? 'home'
-                : 'home-outline';
+              iconName = 'beehive-outline'
             } else if (route.name === 'Add Recipe') {
-              iconName = focused ? 'camera' : 'camera-outline';
+              iconName = 'camera-outline'
             } else if (route.name === 'Search') {
-              iconName = focused ? 'search' : 'search-outline';
+              iconName = 'magnify'
             }
 
-            return <Ionicons name={iconName} size={size} color={color} />;
+            return <MaterialCommunityIcons name={iconName} size={size} color={color} />
           },
         })}
         tabBarOptions={{
           activeTintColor: 'tomato',
           inactiveTintColor: 'gray',
+          showLabel: false
         }}
       >
         <BottomTab.Screen

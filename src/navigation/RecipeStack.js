@@ -1,4 +1,5 @@
 import React from 'react'
+import { Text, View } from 'react-native'
 
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -13,10 +14,7 @@ const RecipeStackNavigation = () => {
         name="Home"
         component={Home}
         options={{
-          title: '',
-          headerBackTitleVisible: false,
-          headerTransparent: true,
-          headerTintColor: '#ffffff',
+          title: "Resibee"
         }}
       />
       <Stack.Screen
@@ -25,7 +23,8 @@ const RecipeStackNavigation = () => {
         options={{
           headerStyle: {
             backgroundColor: '#ffffff'
-          }
+          },
+          headerBackTitleVisible: false
         }}
       />
     </Stack.Navigator>

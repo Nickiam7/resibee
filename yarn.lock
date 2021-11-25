@@ -1047,6 +1047,11 @@
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
+"@expo-google-fonts/abeezee@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/abeezee/-/abeezee-0.2.0.tgz#d8a1d23a829e37b96b29fa5b038ca262a403e9eb"
+  integrity sha512-SG0N0i0EH2Sz5fj9F65MjnMVn/oKSjso5yyLOo040RRubfAQif3GikrCZRdiS8umYmfPtNixcKci2h0YkfltFA==
+
 "@expo/config-plugins@3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-3.1.0.tgz#0752ff33c5eab21cf42034a44e79df97f0f867f8"
