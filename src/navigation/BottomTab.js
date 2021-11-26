@@ -21,7 +21,7 @@ const BottomTabNavigation = () => {
             if (route.name === 'Home') {
               iconName = 'beehive-outline'
             } else if (route.name === 'Add Recipe') {
-              iconName = 'camera-outline'
+              iconName = 'camera-plus-outline'
             } else if (route.name === 'Search') {
               iconName = 'magnify'
             }

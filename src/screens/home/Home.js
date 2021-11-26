@@ -1,21 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 
-import {
-  useFonts,
-  ABeeZee_400Regular
-} from '@expo-google-fonts/abeezee';
-
 const Home = ({ navigation }) => {
-  const [fontLoaded] = useFonts({ ABeeZee_400Regular })
-
   return (
     <View style={styles.container}>
-      <Text style={{ fontFamily: 'ABeeZee_400Regular' }}>Hello From HOME!!!!</Text>
+      <Text style={{ fontFamily: 'ABeeZee_400Regular' }}>Resibee App</Text>
       <TouchableOpacity
         onPress={() => navigation.navigate('SingleRecipe')}
       >
-        <Text>Aunt Beena's Stuffing</Text>
+        <Text>Oh Hye there I'm an entry!</Text>
       </TouchableOpacity>
     </View>
   )

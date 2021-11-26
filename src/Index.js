@@ -1,10 +1,13 @@
 import React from 'react'
 
+import { AppRoot } from '@components'
 import { BottomTabNavigation } from '@navigation'
 
 const App = () => {
   return (
-    <BottomTabNavigation />
+    <AppRoot>
+      <BottomTabNavigation />
+    </AppRoot>
   );
 }
 
