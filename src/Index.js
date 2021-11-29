@@ -3,10 +3,14 @@ import React from 'react'
 import { AppRoot } from '@components'
 import { BottomTabNavigation } from '@navigation'
 
+import { AuthContextProvider } from './context/AuthContext'
+
 const App = () => {
   return (
     <AppRoot>
-      <BottomTabNavigation />
+      <AuthContextProvider>
+        <BottomTabNavigation />
+      </AuthContextProvider>
     </AppRoot>
   );
 }

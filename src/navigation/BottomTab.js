@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-import { AddRecipe, Search } from '@screens'
+import { AddRecipe, Search, SignUp } from '@screens'
 import RecipeStackNavigation from './RecipeStack'
 
 const BottomTab = createBottomTabNavigator();
@@ -24,6 +24,8 @@ const BottomTabNavigation = () => {
               iconName = 'camera-plus-outline'
             } else if (route.name === 'Search') {
               iconName = 'magnify'
+            } else if (route.name === 'SignUp') {
+              iconName = 'account'
             }
 
             return <MaterialCommunityIcons name={iconName} size={size} color={color} />
@@ -46,6 +48,10 @@ const BottomTabNavigation = () => {
         <BottomTab.Screen
           name="Search"
           component={Search}
+        />
+        <BottomTab.Screen
+          name="SignUp"
+          component={SignUp}
         />
       </BottomTab.Navigator>
     </NavigationContainer>
