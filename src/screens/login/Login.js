@@ -1,39 +1,39 @@
 import React, { useState, useRef } from 'react'
 import {
+  ActivityIndicator,
   Alert,
   Button,
   Text,
   View,
-  TouchableOpacity,
   TextInput,
+  TouchableOpacity,
   StyleSheet
 } from 'react-native'
 
-import { useSignup } from '../../hooks/useSignup'
+import { useLogin } from '../../hooks/useLogin'
 
-const SignUp = ({ navigation }) => {
+const Login = ({ navigation }) => {
   const [form, setForm] = useState({
     email: '',
-    displayName: '',
     password: ''
   })
-  const { signup, isPending, error } = useSignup()
+  const { login, isPending, error } = useLogin()
 
   const setFormInput = (key, value) => {
     setForm({ ...form, [key]: value })
   }
 
   const emailRef = useRef(null)
-  const displayNameRef = useRef(null)
   const passwordRef = useRef(null)
 
   const handleSubmit = () => {
-    const { email, password, displayName } = form
-    signup(email, password, displayName)
+    const { email, password } = form
+    login(email, password)
   }
 
   return (
     <View style={styles.container}>
+      {isPending ? <ActivityIndicator /> : null}
       <TextInput
         ref={emailRef}
         value={form.email}
@@ -41,19 +41,6 @@ const SignUp = ({ navigation }) => {
         onChangeText={(value) => setFormInput('email', value)}
         keyboardType='email-address'
         placeholder='Email'
-        returnKeyType='next'
-        clearButtonMode='while-editing'
-        onSubmitEditing={() => {
-          displayNameRef.current?.focus()
-        }}
-        style={{ marginTop: 20, width: 150 }}
-      />
-      <TextInput
-        ref={displayNameRef}
-        value={form.displayName}
-        autoCapitalize='none'
-        onChangeText={(value) => setFormInput('displayName', value)}
-        placeholder='Display Name'
         returnKeyType='next'
         clearButtonMode='while-editing'
         onSubmitEditing={() => {
@@ -73,7 +60,7 @@ const SignUp = ({ navigation }) => {
       />
       {!isPending &&
         <Button
-          title="Sign up"
+          title="Login"
           onPress={handleSubmit}
         />
       }
@@ -84,9 +71,9 @@ const SignUp = ({ navigation }) => {
       }
       <TouchableOpacity>
         <Text
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('SignUp')}
         >
-          Login
+          Sign up
         </Text>
       </TouchableOpacity>
       {error && isPending && Alert.alert('Sorry,', error)}
@@ -103,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUp
+export default Login

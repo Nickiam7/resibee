@@ -2,38 +2,25 @@ import { useState, useEffect } from 'react'
 import { resibeeAuth, resibeeFirestore } from '../config/firebase/config'
 import { useAuthContext } from './useAuthContext'
 
-import { useNavigation } from '@react-navigation/native'
-
-export const useSignup = () => {
+export const useLogin = () => {
   const [isCancelled, setIsCancelled] = useState(false)
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
   const { dispatch } = useAuthContext()
-  const navigation = useNavigation()
 
-  const signup = async (email, password, displayName) => {
+  const login = async (email, password) => {
     setError(null)
     setIsPending(true)
 
     try {
-      const res = await resibeeAuth.createUserWithEmailAndPassword(email, password)
-
-      if (!res) {
-        throw new Error('Could not complete signup')
-      }
-
-      await res.user.updateProfile({ displayName })
-      await resibeeFirestore.collection('users').doc(res.user.uid).set({
-        online: true,
-        displayName,
-      })
-
-      navigation.navigate('Home')
+      const res = await resibeeAuth.signInWithEmailAndPassword(email, password)
+      await resibeeFirestore.collection('users').doc(res.user.uid).update({ online: true })
 
       dispatch({ type: 'LOGIN', payload: res.user })
 
       setIsPending(false)
       setError(null)
+
     }
     catch (err) {
       setError(err.message)
@@ -45,5 +32,5 @@ export const useSignup = () => {
     return () => setIsCancelled(true)
   }, [])
 
-  return { signup, error, isPending }
+  return { login, isPending, error }
 }
