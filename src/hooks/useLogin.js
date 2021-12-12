@@ -18,13 +18,16 @@ export const useLogin = () => {
 
       dispatch({ type: 'LOGIN', payload: res.user })
 
-      setIsPending(false)
-      setError(null)
-
+      if (!isCancelled) {
+        setIsPending(false)
+        setError(null)
+      }
     }
     catch (err) {
-      setError(err.message)
-      setIsPending(false)
+      if (!isCancelled) {
+        setError(err.message)
+        setIsPending(false)
+      }
     }
   }
 
