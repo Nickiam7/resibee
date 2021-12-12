@@ -2,7 +2,7 @@ import React from 'react'
 
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { Home, Login, SignUp } from '@screens'
+import { Login, Profile, ResetPassword, SignUp, UpdatePassword } from '@screens'
 
 import { useAuthContext } from '../hooks/useAuthContext'
 
@@ -13,21 +13,30 @@ const AuthStackNavigation = () => {
   return (
     <Stack.Navigator>
       {user ? (
-        <Stack.Screen
-          name="Home"
-          component={Home}
-        />
-      ) : (
         <>
           <Stack.Screen
-            name="Login"
-            component={Login}
+            name='Profile'
+            component={Profile}
             options={{
-              title: "Login"
+              title: user.displayName
             }}
           />
           <Stack.Screen
-            name="SignUp"
+            name='UpdatePassword'
+            component={UpdatePassword}
+          />
+        </>
+      ) : (
+        <>
+          <Stack.Screen
+            name='Login'
+            component={Login}
+            options={{
+              title: 'Login'
+            }}
+          />
+          <Stack.Screen
+            name='SignUp'
             component={SignUp}
             options={{
               headerStyle: {
@@ -35,6 +44,10 @@ const AuthStackNavigation = () => {
               },
               headerBackTitleVisible: false
             }}
+          />
+          <Stack.Screen
+            name='ResetPassword'
+            component={ResetPassword}
           />
         </>
       )}

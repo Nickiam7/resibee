@@ -1,6 +1,5 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import {
-  ActivityIndicator,
   Alert,
   Button,
   Text,
@@ -10,32 +9,28 @@ import {
   StyleSheet
 } from 'react-native'
 
-import { useLogin } from '../../hooks/useLogin'
+import { useResetPassword } from '../../hooks/useResetPassword'
 
-const Login = ({ navigation }) => {
+const ResetPassword = ({ navigation }) => {
+  const { resetPassword, error, isPending } = useResetPassword()
+
   const [form, setForm] = useState({
     email: '',
     password: ''
   })
-  const { login, isPending, error } = useLogin()
 
   const setFormInput = (key, value) => {
     setForm({ ...form, [key]: value })
   }
 
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
-
   const handleSubmit = () => {
-    const { email, password } = form
-    login(email, password)
+    const { email } = form
+    resetPassword(email)
   }
 
   return (
     <View style={styles.container}>
-      {isPending ? <ActivityIndicator /> : null}
       <TextInput
-        ref={emailRef}
         value={form.email}
         autoCapitalize='none'
         onChangeText={(value) => setFormInput('email', value)}
@@ -43,24 +38,11 @@ const Login = ({ navigation }) => {
         placeholder='Email'
         returnKeyType='next'
         clearButtonMode='while-editing'
-        onSubmitEditing={() => {
-          passwordRef.current?.focus()
-        }}
-        style={{ marginTop: 20, width: 150 }}
-      />
-      <TextInput
-        ref={passwordRef}
-        value={form.password}
-        onChangeText={(value) => setFormInput('password', value)}
-        clearButtonMode='while-editing'
-        placeholder='Password'
-        secureTextEntry
-        returnKeyType='done'
         style={{ marginTop: 20, width: 150 }}
       />
       {!isPending &&
         <Button
-          title="Login"
+          title="Reset Password"
           onPress={handleSubmit}
         />
       }
@@ -74,13 +56,6 @@ const Login = ({ navigation }) => {
           onPress={() => navigation.navigate('SignUp')}
         >
           Sign up
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Text
-          onPress={() => navigation.navigate('ResetPassword')}
-        >
-          Reset Password
         </Text>
       </TouchableOpacity>
       {error && isPending && Alert.alert('Sorry,', error)}
@@ -97,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login
+export default ResetPassword

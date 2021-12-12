@@ -13,7 +13,7 @@ import { useLogout } from '../../hooks/useLogout'
 
 const Home = ({ navigation }) => {
   const { logout, isPending } = useLogout()
-  const { user, authIsReady } = useAuthContext()
+  const { user } = useAuthContext()
   const { documents, error } = useCollection('users')
 
   let users = (
