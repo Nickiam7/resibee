@@ -4,21 +4,22 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
-
+import { useCollection } from '../../hooks/useCollection'
 import { useFirestore } from '../../hooks/useFirestore'
 import { useNavigation } from '@react-navigation/native'
 
-const RecipeList = ({ recipes }) => {
+const FavoriteList = ({ user }) => {
 
   const navigation = useNavigation()
-  const { deleteDocument, updateDocument } = useFirestore('recipes')
+  const { documents, error } = useCollection(
+    'recipes',
+    ['uid', '==', user.uid],
+    ['favorite', '==', true],
+  )
+  const { deleteDocument } = useFirestore('recipes')
 
-  const handleFavorite = (recipe) => {
-    updateDocument(recipe.id, { favorite: !recipe.favorite })
-  }
-
-  let recipesList = recipes ? (
-    recipes && recipes.map(recipe => (
+  let favoriteList = documents.length ? (
+    documents && documents.map(recipe => (
       <View key={recipe.id}>
         <View style={{
           display: 'flex',
@@ -36,25 +37,20 @@ const RecipeList = ({ recipes }) => {
           <TouchableOpacity
             onPress={() => { deleteDocument(recipe.id) }}
           >
-            <Text>   (X)   </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => { handleFavorite(recipe) }}
-          >
-            <Text>   (Fav)   </Text>
+            <Text>x</Text>
           </TouchableOpacity>
         </View>
       </View >
     ))
   ) : (
-    <Text>No Recipes</Text>
+    <Text>No Favorite Recipes</Text>
   )
 
   return (
     <>
-      {recipesList}
+      {favoriteList}
     </>
   )
 }
 
-export default RecipeList
+export default FavoriteList

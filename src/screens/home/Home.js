@@ -4,21 +4,21 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from 'react-native'
 
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useCollection } from '../../hooks/useCollection'
 import { useLogout } from '../../hooks/useLogout'
 
-import { RecipeList } from '@components'
+import { RecipeList, FavoriteList } from '@components'
 
 const Home = ({ navigation }) => {
   const { logout, isPending } = useLogout()
   const { user, authIsReady } = useAuthContext()
   const { documents, error } = useCollection(
     'recipes',
-    ['favorite', '==', true],
     ['uid', '==', user.uid],
   )
 
@@ -31,7 +31,8 @@ const Home = ({ navigation }) => {
         <Text>Oh Hye there I'm an entry!</Text>
       </TouchableOpacity>
       {<RecipeList recipes={documents} />}
-
+      <Text>-----Favorites-----</Text>
+      {<FavoriteList user={user} />}
       <TouchableOpacity
         onPress={logout}
       >
