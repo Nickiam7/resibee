@@ -11,17 +11,15 @@ import { useAuthContext } from '../../hooks/useAuthContext'
 import { useCollection } from '../../hooks/useCollection'
 import { useLogout } from '../../hooks/useLogout'
 
+import { RecipeList } from '@components'
+
 const Home = ({ navigation }) => {
   const { logout, isPending } = useLogout()
-  const { user } = useAuthContext()
-  const { documents, error } = useCollection('users')
-
-  let users = (
-    documents && documents.map(user => (
-      <View key={user.id}>
-        <Text>{user.displayName}</Text>
-      </View>
-    ))
+  const { user, authIsReady } = useAuthContext()
+  const { documents, error } = useCollection(
+    'recipes',
+    ['favorite', '==', true],
+    ['uid', '==', user.uid],
   )
 
   return (
@@ -32,7 +30,7 @@ const Home = ({ navigation }) => {
       >
         <Text>Oh Hye there I'm an entry!</Text>
       </TouchableOpacity>
-      {documents ? users : <ActivityIndicator />}
+      {<RecipeList recipes={documents} />}
 
       <TouchableOpacity
         onPress={logout}

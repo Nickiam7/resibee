@@ -1,9 +1,10 @@
 import React from 'react'
 
-import { AppRoot } from '@components'
 import { AppNavigation } from '@navigation'
 
 import { AuthContextProvider } from './context/AuthContext'
+
+import { AppRoot } from '@components'
 
 const App = () => {
   return (

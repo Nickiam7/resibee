@@ -13,11 +13,12 @@ import {
 import { useLogin } from '../../hooks/useLogin'
 
 const Login = ({ navigation }) => {
+  const { login, isPending, error } = useLogin()
+
   const [form, setForm] = useState({
     email: '',
     password: ''
   })
-  const { login, isPending, error } = useLogin()
 
   const setFormInput = (key, value) => {
     setForm({ ...form, [key]: value })

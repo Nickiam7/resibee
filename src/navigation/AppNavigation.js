@@ -1,7 +1,8 @@
 import React from 'react'
-import { Text, View } from 'react-native'
 
-import { BottomTabNavigation, AuthStackNavigation } from '@navigation'
+import BottomTabNavigation from './BottomTab'
+import AuthStackNavigation from './AuthStack'
+
 import { NavigationContainer } from "@react-navigation/native";
 
 import { useAuthContext } from '../hooks/useAuthContext'

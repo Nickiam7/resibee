@@ -19,12 +19,13 @@ const RecipeStackNavigation = () => {
       <Stack.Screen
         name="SingleRecipe"
         component={SingleRecipe}
-        options={{
+        options={({ route }) => ({
+          title: route.params.title,
           headerStyle: {
             backgroundColor: '#ffffff'
           },
           headerBackTitleVisible: false
-        }}
+        })}
       />
     </Stack.Navigator>
   )
