@@ -28,7 +28,8 @@ const RecipeList = ({ recipes }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate('SingleRecipe', {
               recipeId: recipe.id,
-              title: recipe.title
+              title: recipe.title,
+              favorite: recipe.favorite
             })}
           >
             <Text>{recipe.title}</Text>

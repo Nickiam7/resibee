@@ -12,7 +12,11 @@ import { useAuthContext } from '../../hooks/useAuthContext'
 import { useCollection } from '../../hooks/useCollection'
 import { useLogout } from '../../hooks/useLogout'
 
-import { RecipeList, FavoriteList } from '@components'
+import {
+  RecipeList,
+  FavoriteList,
+  GradientBackground
+} from '@components'
 
 const Home = ({ navigation }) => {
   const { logout, isPending } = useLogout()
@@ -23,23 +27,22 @@ const Home = ({ navigation }) => {
   )
 
   return (
-    <View style={styles.container}>
+    <GradientBackground style={styles.container}>
       <Text style={{ fontFamily: 'ABeeZee_400Regular' }}>Resibee App</Text>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('SingleRecipe')}
-      >
-        <Text>Oh Hye there I'm an entry!</Text>
-      </TouchableOpacity>
-      {<RecipeList recipes={documents} />}
-      <Text>-----Favorites-----</Text>
-      {<FavoriteList user={user} />}
+      <View>
+        {<RecipeList recipes={documents} />}
+      </View>
+      <View>
+        <Text>-----Favorites-----</Text>
+        {<FavoriteList user={user} />}
+      </View>
       <TouchableOpacity
         onPress={logout}
       >
         {!isPending && user && <Text>Logout</Text>}
         {isPending && user && <Text>Logout.....</Text>}
       </TouchableOpacity>
-    </View>
+    </GradientBackground>
   )
 }
 
@@ -49,6 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: 50,
   },
 });
 

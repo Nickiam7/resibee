@@ -18,7 +18,7 @@ const FavoriteList = ({ user }) => {
   )
   const { deleteDocument } = useFirestore('recipes')
 
-  let favoriteList = documents.length ? (
+  let favoriteList = documents ? (
     documents && documents.map(recipe => (
       <View key={recipe.id}>
         <View style={{

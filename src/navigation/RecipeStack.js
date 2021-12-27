@@ -8,12 +8,17 @@ const Stack = createStackNavigator()
 
 const RecipeStackNavigation = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      headerMode="float"
+    >
       <Stack.Screen
         name="Home"
         component={Home}
         options={{
-          title: "Resibee"
+          title: 'Resibee',
+          headerBackTitleVisible: false,
+          headerTransparent: true,
+          headerTintColor: '#ffffff'
         }}
       />
       <Stack.Screen
@@ -21,9 +26,7 @@ const RecipeStackNavigation = () => {
         component={SingleRecipe}
         options={({ route }) => ({
           title: route.params.title,
-          headerStyle: {
-            backgroundColor: '#ffffff'
-          },
+          headerTransparent: true,
           headerBackTitleVisible: false
         })}
       />
