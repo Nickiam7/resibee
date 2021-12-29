@@ -1,5 +1,9 @@
 import { useReducer, useEffect, useState } from 'react'
-import { resibeeFirestore, timestamp } from '../config/firebase/config'
+import {
+  resibeeFirestore,
+  resibeeStorage,
+  timestamp
+} from '../config/firebase/config'
 
 let initialState = {
   document: null,
@@ -43,10 +47,26 @@ export const useFirestore = (collection) => {
     try {
       const createdAt = timestamp.fromDate(new Date())
       const addedDocument = await ref.add({ ...doc, createdAt })
+
+      const blob = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
+        xhr.onload = () => resolve(xhr.response)
+        xhr.responseType = 'blob'
+        xhr.open('GET', doc.recipeImage, true)
+        xhr.send(null)
+      })
+
+      const uploadPath = `recipes/${doc.uid}/${addedDocument.id}/${doc.title}`
+      const uploadTask = await resibeeStorage.ref(uploadPath).put(blob)
+      const downloadURL = await uploadTask.ref.getDownloadURL()
+
+      await ref.doc(addedDocument.id).update({ ...doc, recipeImage: downloadURL })
+
       dispatchIfNotCancelled({ type: 'ADDED_DOCUMENT', payload: addedDocument })
     }
     catch (err) {
       dispatchIfNotCancelled({ type: 'ERROR', payload: err.message })
+      console.log(err.message)
     }
   }
 

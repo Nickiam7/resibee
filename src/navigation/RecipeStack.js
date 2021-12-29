@@ -9,10 +9,10 @@ const Stack = createStackNavigator()
 const RecipeStackNavigation = () => {
   return (
     <Stack.Navigator
-      headerMode="float"
+      headerMode='float'
     >
       <Stack.Screen
-        name="Home"
+        name='Home'
         component={Home}
         options={{
           title: 'Resibee',
@@ -22,7 +22,7 @@ const RecipeStackNavigation = () => {
         }}
       />
       <Stack.Screen
-        name="SingleRecipe"
+        name='SingleRecipe'
         component={SingleRecipe}
         options={({ route }) => ({
           title: route.params.title,

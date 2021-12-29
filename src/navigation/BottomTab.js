@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { AddRecipe, Search, SignUp } from '@screens'
 import RecipeStackNavigation from './RecipeStack'
+import AddRecipeStackNavigation from './AddRecipeStack'
 import AuthStackNavigation from './AuthStack'
 
 const BottomTab = createBottomTabNavigator();
@@ -42,7 +43,7 @@ const BottomTabNavigation = () => {
       />
       <BottomTab.Screen
         name="Add Recipe"
-        component={AddRecipe}
+        component={AddRecipeStackNavigation}
       />
       <BottomTab.Screen
         name="Search"

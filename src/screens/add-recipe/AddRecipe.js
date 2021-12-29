@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
+  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -10,12 +11,19 @@ import {
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useFirestore } from '../../hooks/useFirestore'
 
-const AddRecipe = () => {
+const AddRecipe = ({ navigation, route }) => {
   const { user } = useAuthContext()
   const { addDocument, response } = useFirestore('recipes')
 
   const [favorite, setFavorite] = useState(false)
   const [favText, setFavText] = useState('Favorite')
+  const [recipeImage, setRecipeImage] = useState(null)
+
+  useEffect(() => {
+    if (route.params?.image) {
+      setRecipeImage(route.params?.image)
+    }
+  }, [route.params?.image])
 
   const [form, setForm] = useState({
     title: '',
@@ -30,7 +38,8 @@ const AddRecipe = () => {
     addDocument({
       uid: user.uid,
       title,
-      favorite
+      favorite,
+      recipeImage,
     })
   }
 
@@ -45,7 +54,6 @@ const AddRecipe = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Add a new Recipe</Text>
       <TextInput
         value={form.title}
         autoCapitalize='words'
@@ -56,6 +64,17 @@ const AddRecipe = () => {
         style={{ marginTop: 20, width: 150 }}
       />
       <TouchableOpacity>
+        <Text
+          onPress={() => navigation.navigate('Camera')}
+        >
+          Add image
+        </Text>
+      </TouchableOpacity>
+      <Image
+        style={styles.image}
+        source={{ uri: recipeImage }}
+      />
+      <TouchableOpacity style={{ marginVertical: 50 }}>
         <Text
           onPress={handleFavorite}
         >
@@ -79,6 +98,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  image: {
+    width: 50,
+    height: 50,
   },
 });
 
