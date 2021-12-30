@@ -11,19 +11,21 @@ import {
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useFirestore } from '../../hooks/useFirestore'
 
+import { RecipePhotoThumbs } from '@components'
+
 const AddRecipe = ({ navigation, route }) => {
   const { user } = useAuthContext()
   const { addDocument, response } = useFirestore('recipes')
 
   const [favorite, setFavorite] = useState(false)
   const [favText, setFavText] = useState('Favorite')
-  const [recipeImage, setRecipeImage] = useState(null)
+  const [recipePhotos, setRecipePhotos] = useState([])
 
   useEffect(() => {
-    if (route.params?.image) {
-      setRecipeImage(route.params?.image)
+    if (route.params?.photos) {
+      setRecipePhotos(route.params?.photos)
     }
-  }, [route.params?.image])
+  }, [route.params?.photos])
 
   const [form, setForm] = useState({
     title: '',
@@ -39,7 +41,7 @@ const AddRecipe = ({ navigation, route }) => {
       uid: user.uid,
       title,
       favorite,
-      recipeImage,
+      recipePhotos,
     })
   }
 
@@ -70,10 +72,7 @@ const AddRecipe = ({ navigation, route }) => {
           Add image
         </Text>
       </TouchableOpacity>
-      <Image
-        style={styles.image}
-        source={{ uri: recipeImage }}
-      />
+      <RecipePhotoThumbs photos={recipePhotos} />
       <TouchableOpacity style={{ marginVertical: 50 }}>
         <Text
           onPress={handleFavorite}

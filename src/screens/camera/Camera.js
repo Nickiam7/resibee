@@ -1,19 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {
+  useEffect,
+  useRef,
+  useState
+} from 'react'
 import {
   Image,
-  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native'
+
 import { Camera } from 'expo-camera'
+
+import { RecipePhotoThumbs } from '@components'
 
 const CameraScreen = ({ navigation, route }) => {
   const cameraRef = useRef()
   const [hasPermission, setHasPermission] = useState(null)
   const [photos, setPhotos] = useState([])
-  const [photoUri, setPhotoUri] = useState(null)
 
   useEffect(() => {
     (async () => {
@@ -32,9 +37,7 @@ const CameraScreen = ({ navigation, route }) => {
   const takePhoto = async () => {
     if (cameraRef) {
       const photo = await cameraRef.current.takePictureAsync()
-      // photoP = Platform.OS === 'ios' ? photo.uri.replace('file://', '') : photo.uri;
-      // setPhotos([...photos, photo])
-      setPhotoUri(photo.uri)
+      setPhotos([...photos, photo.uri])
     }
   }
 
@@ -53,7 +56,7 @@ const CameraScreen = ({ navigation, route }) => {
             onPress={() => {
               navigation.navigate({
                 name: 'AddRecipe',
-                params: { image: photoUri },
+                params: { photos },
                 merge: true
               })
             }}
@@ -61,10 +64,8 @@ const CameraScreen = ({ navigation, route }) => {
             Done
           </Text>
         </View>
-        <Image
-          style={styles.image}
-          source={{ uri: photoUri }}
-        />
+
+        <RecipePhotoThumbs photos={photos} />
       </View>
       <View>
         <TouchableOpacity
@@ -95,16 +96,16 @@ const styles = StyleSheet.create({
     height: 75,
     alignSelf: 'center'
   },
-  image: {
-    width: 50,
-    height: 50,
-  },
   labels: {
     flexDirection: 'row',
     height: 25,
     width: '100%',
     justifyContent: 'space-between',
     padding: 5,
-  }
+  },
+  image: {
+    width: 50,
+    height: 50,
+  },
 });
 export default CameraScreen
