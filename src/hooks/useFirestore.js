@@ -54,10 +54,11 @@ export const useFirestore = (collection) => {
         const blob = await response.blob()
 
         const img = await resibeeStorage.ref().child(`${uploadPath}-${index}`).put(blob)
-        await img.ref.getDownloadURL()
+        return await img.ref.getDownloadURL()
       })
+      const allBlobs = await Promise.all(blobs)
 
-      // await ref.doc(addedDocument.id).update({ ...doc, recipePhotos: resolveAllBlobs })
+      await ref.doc(addedDocument.id).update({ ...doc, recipePhotos: allBlobs })
 
       dispatchIfNotCancelled({ type: 'ADDED_DOCUMENT', payload: addedDocument })
     }
