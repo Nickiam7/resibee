@@ -8,11 +8,11 @@ import { AppRoot } from '@components'
 
 const App = () => {
   return (
-    <AppRoot>
-      <AuthContextProvider>
+    <AuthContextProvider>
+      <AppRoot>
         <AppNavigation />
-      </AuthContextProvider>
-    </AppRoot>
+      </AppRoot>
+    </AuthContextProvider>
   );
 }
 
