@@ -48,25 +48,18 @@ export const useFirestore = (collection) => {
       const createdAt = timestamp.fromDate(new Date())
       const addedDocument = await ref.add({ ...doc, createdAt })
 
-      const blobs = doc.recipePhotos.map(async photo => {
-        await new Promise((resolve, reject) => {
-          const xhr = new XMLHttpRequest()
-          xhr.open('GET', photo, true)
-          xhr.responseType = 'blob'
-          xhr.onload = () => resolve(xhr.response)
-          xhr.send(null)
-        })
-      })
-
       const uploadPath = `recipes/${doc.uid}/${addedDocument.id}/${doc.title}`
-      const blobImages = await blobs.map(async (blob, index) => {
+      const blobs = doc.recipePhotos.map(async (photo, index) => {
+        const response = await fetch(photo)
+        const blob = await response.blob()
+
         const img = await resibeeStorage.ref().child(`${uploadPath}-${index}`).put(blob)
         await img.ref.getDownloadURL()
       })
-      await ref.doc(addedDocument.id).update({ ...doc, recipePhotos: blobImages })
+
+      // await ref.doc(addedDocument.id).update({ ...doc, recipePhotos: resolveAllBlobs })
 
       dispatchIfNotCancelled({ type: 'ADDED_DOCUMENT', payload: addedDocument })
-      dispatchIfNotCancelled({ type: "UPDATED_DOCUMENT", payload: updatedDocument })
     }
     catch (err) {
       dispatchIfNotCancelled({ type: 'ERROR', payload: err.message })
