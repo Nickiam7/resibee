@@ -29,7 +29,8 @@ const RecipeList = ({ recipes }) => {
             onPress={() => navigation.navigate('SingleRecipe', {
               recipeId: recipe.id,
               title: recipe.title,
-              favorite: recipe.favorite
+              favorite: recipe.favorite,
+              images: recipe.recipePhotos
             })}
           >
             <Text>{recipe.title}</Text>
