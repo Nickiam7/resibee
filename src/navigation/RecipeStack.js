@@ -2,7 +2,11 @@ import React from 'react'
 
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { Home, SingleRecipe } from '@screens'
+import {
+  Home,
+  RecipeImage,
+  SingleRecipe
+} from '@screens'
 
 const Stack = createStackNavigator()
 
@@ -29,6 +33,14 @@ const RecipeStackNavigation = () => {
           headerTransparent: true,
           headerBackTitleVisible: false
         })}
+      />
+      <Stack.Screen
+        name='RecipeImage'
+        component={RecipeImage}
+        options={{
+          headerTransparent: true,
+          headerBackTitleVisible: false
+        }}
       />
     </Stack.Navigator>
   )
