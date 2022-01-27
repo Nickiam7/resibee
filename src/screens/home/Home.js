@@ -1,11 +1,9 @@
 import React from 'react'
 import {
-  ActivityIndicator,
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  TextInput
 } from 'react-native'
 
 import { useAuthContext } from '../../hooks/useAuthContext'
@@ -14,11 +12,10 @@ import { useLogout } from '../../hooks/useLogout'
 
 import {
   RecipeList,
-  FavoriteList,
   GradientBackground
 } from '@components'
 
-const Home = ({ navigation }) => {
+const Home = () => {
   const { logout, isPending } = useLogout()
   const { user, authIsReady } = useAuthContext()
   const { documents, error } = useCollection(
@@ -28,13 +25,13 @@ const Home = ({ navigation }) => {
 
   return (
     <GradientBackground style={styles.container}>
-      <Text style={{ fontFamily: 'ABeeZee_400Regular' }}>Resibee App</Text>
+      <Text
+        style={{ fontFamily: 'ABeeZee_400Regular' }}
+      >
+        Resibee App
+      </Text>
       <View>
         {<RecipeList recipes={documents} />}
-      </View>
-      <View>
-        <Text>-----Favorites-----</Text>
-        {<FavoriteList user={user} />}
       </View>
       <TouchableOpacity
         onPress={logout}

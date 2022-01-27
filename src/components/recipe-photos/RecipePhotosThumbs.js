@@ -10,7 +10,9 @@ const RecipePhotoThumbs = ({ photos }) => {
     <View style={styles.container}>
       {photos && photos.map(photo => (
         <TouchableOpacity
-          onPress={() => navigation.navigate('RecipeImage', { photo })}
+          onPress={() => navigation.navigate('RecipeImage',
+            { photo }
+          )}
           key={photo}
         >
           <Image
