@@ -1,14 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 
-import { BottomTabNavigation } from '@navigation'
+import { AuthContextProvider } from './context/AuthContext'
+import { AppNavigation } from '@navigation'
+
 import { AppRoot } from '@components'
 
 const App = () => {
   return (
-    <AppRoot>
-      <StatusBar style="auto" />
-      <BottomTabNavigation />
-    </AppRoot>
+    <AuthContextProvider>
+      <AppRoot>
+        <StatusBar style="auto" />
+        <AppNavigation />
+      </AppRoot>
+    </AuthContextProvider>
   )
 }
 

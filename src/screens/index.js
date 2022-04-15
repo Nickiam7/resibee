@@ -1,2 +1,5 @@
-export { default as Home } from './home/Home'
 export { default as AddRecipe } from './add-recipe/AddRecipe'
+export { default as Home } from './home/Home'
+export { default as Profile } from './profile/Profile'
+export { default as LogIn } from './auth/log-in/LogIn'
+export { default as SignUp } from './auth/sign-up/SignUp'
