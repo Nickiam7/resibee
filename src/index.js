@@ -1,15 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 
+import { BottomTabNavigation } from '@navigation'
 import { AppRoot } from '@components'
-
-import { Home } from '@screens'
-
 
 const App = () => {
   return (
     <AppRoot>
       <StatusBar style="auto" />
-      <Home />
+      <BottomTabNavigation />
     </AppRoot>
   )
 }
