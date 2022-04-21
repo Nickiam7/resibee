@@ -26,17 +26,14 @@ const AuthStackNavigation = () => {
             name='LogIn'
             component={LogIn}
             options={{
-              title: 'Log in'
+              headerShown: false,
             }}
           />
           <Stack.Screen
             name='SignUp'
             component={SignUp}
             options={{
-              headerStyle: {
-                backgroundColor: '#ffffff'
-              },
-              headerBackTitleVisible: false
+              headerShown: false,
             }}
           />
         </>

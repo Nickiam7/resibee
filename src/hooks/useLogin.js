@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { resibeeAuth, resibeeFirestore } from '../config/firebase/config'
 import { useAuthContext } from './useAuthContext'
 
-export const useLogin = () => {
+const useLogin = () => {
   const [isCancelled, setIsCancelled] = useState(false)
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
@@ -37,3 +37,4 @@ export const useLogin = () => {
 
   return { login, isPending, error }
 }
+export default useLogin
