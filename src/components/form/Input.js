@@ -1,16 +1,14 @@
 import { forwardRef } from 'react'
 import {
   StyleSheet,
-  TextInput,
-  Text,
-  View
+  TextInput
 } from "react-native"
 
 const Input = forwardRef(({ style, label, ...props }, ref) => {
   return (
     <TextInput
       ref={ref}
-      placeholderTextColor={'rgba(0,0,0,0.75)'}
+      placeholderTextColor={'rgba(0,0,0,0.5)'}
       style={[
         styles.input,
         style,
@@ -19,8 +17,6 @@ const Input = forwardRef(({ style, label, ...props }, ref) => {
     />
   )
 })
-
-
 
 const styles = StyleSheet.create({
   input: {
