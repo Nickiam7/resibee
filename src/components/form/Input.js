@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
   input: {
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: 'rgba(254, 220, 159, 0.7777)',
+    borderColor: 'rgba(254, 220, 159, 0.95)',
     height: 50,
     marginTop: 25,
     width: 325,
     paddingHorizontal: 15,
     paddingVertical: 5,
-    backgroundColor: 'rgba(253, 224, 185, 0.75)'
+    backgroundColor: 'rgba(253, 224, 185, 0.95)'
   }
 })
 

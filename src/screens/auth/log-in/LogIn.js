@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react'
 import {
   ActivityIndicator,
   Alert,
-  Button,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -15,6 +14,7 @@ import {
 import { useLogin } from '@hooks'
 
 import {
+  Button,
   GradientBackground,
   Input,
   Logo
@@ -40,7 +40,7 @@ const LogIn = ({ navigation }) => {
   }
 
   return (
-    <GradientBackground>
+    <GradientBackground striped={true}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -52,7 +52,7 @@ const LogIn = ({ navigation }) => {
         >
           <View>
             <Logo
-              size={50}
+              size={65}
             />
           </View>
           <View>
@@ -81,9 +81,10 @@ const LogIn = ({ navigation }) => {
             />
             {!isPending &&
               <Button
-                title="Login"
                 onPress={handleSubmit}
-              />
+              >
+                Login
+              </Button>
             }
             {isPending &&
               <Button
