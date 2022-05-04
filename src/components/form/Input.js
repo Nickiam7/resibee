@@ -4,6 +4,8 @@ import {
   TextInput
 } from "react-native"
 
+import global from '../../globals/styles'
+
 const Input = forwardRef(({ style, label, ...props }, ref) => {
   return (
     <TextInput
@@ -20,15 +22,14 @@ const Input = forwardRef(({ style, label, ...props }, ref) => {
 
 const styles = StyleSheet.create({
   input: {
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: 'rgba(254, 220, 159, 0.95)',
     height: 50,
-    marginTop: 25,
     width: 325,
-    paddingHorizontal: 15,
-    paddingVertical: 5,
-    backgroundColor: 'rgba(253, 224, 185, 0.95)'
+    borderRadius: global.elements.borderRadius,
+    borderWidth: global.elements.borderWidth,
+    borderColor: global.elements.input.borderColor,
+    marginTop: global.spacing.lg,
+    paddingHorizontal: global.spacing.sm,
+    backgroundColor: global.elements.input.backgroundColor,
   }
 })
 

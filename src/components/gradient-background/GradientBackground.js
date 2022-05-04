@@ -5,14 +5,12 @@ import { StatusBar } from 'expo-status-bar'
 
 import StripedGradientBackground from './StripedGradientBackground'
 
+import global from '../../globals/styles'
+
 const GradientBackground = ({ children, striped }) => {
   return (
     <>
-      <View style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
+      <View style={global.elements.container}>
         <StatusBar style="dark" />
         <LinearGradient
           style={{

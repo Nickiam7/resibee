@@ -20,6 +20,8 @@ import {
   Logo
 } from '@components'
 
+import global from '../../../globals/styles'
+
 const LogIn = ({ navigation }) => {
   const { login, isPending, error } = useLogin()
 
@@ -52,7 +54,7 @@ const LogIn = ({ navigation }) => {
         >
           <View>
             <Logo
-              size={65}
+              size={64}
             />
           </View>
           <View>
@@ -79,6 +81,13 @@ const LogIn = ({ navigation }) => {
               secureTextEntry
               returnKeyType='done'
             />
+            <View style={{ alignItems: 'flex-end', paddingVertical: global.spacing.md }}>
+              <Text
+                onPress={() => Alert.alert('Hello World')}
+              >
+                Forgot Password?
+              </Text>
+            </View>
             {!isPending &&
               <Button
                 onPress={handleSubmit}
@@ -88,16 +97,20 @@ const LogIn = ({ navigation }) => {
             }
             {isPending &&
               <Button
+                style={{ fontColor: '#ffffff' }}
                 title="Loading..."
               />
             }
-            <TouchableOpacity>
-              <Text
-                onPress={() => navigation.navigate('SignUp')}
-              >
-                Sign up
-              </Text>
-            </TouchableOpacity>
+            <View style={{ alignItems: 'center', paddingVertical: global.spacing.lg }}>
+              <TouchableOpacity>
+                <Text
+                  onPress={() => navigation.navigate('SignUp')}
+                  style={{ fontSize: global.font.md }}
+                >
+                  Need an account? Sign up
+                </Text>
+              </TouchableOpacity>
+            </View>
             {error && isPending && Alert.alert('Sorry,', error)}
           </View>
         </KeyboardAvoidingView>

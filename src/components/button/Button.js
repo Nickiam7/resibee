@@ -1,9 +1,9 @@
 import {
-  Text,
   TouchableOpacity,
   StyleSheet
 } from 'react-native'
 
+import global from '../../globals/styles'
 import AcmeText from '../acme-text/AcmeText'
 
 const Button = ({
@@ -29,15 +29,15 @@ const Button = ({
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#252b45',
-    marginTop: 25,
-    paddingVertical: 10,
-    borderRadius: 10,
+    backgroundColor: global.colors.blue,
+    marginTop: global.spacing.lg,
+    paddingVertical: global.spacing.sm,
+    borderRadius: global.elements.borderRadius,
   },
   buttonText: {
+    fontSize: global.font.lg,
     textAlign: 'center',
     color: '#ffffff',
-    fontSize: 25,
   }
 })
 

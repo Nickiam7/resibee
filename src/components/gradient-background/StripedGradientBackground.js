@@ -1,5 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 
+import global from '../../globals/styles'
+
 const StripedGradientBackground = () => {
   return (
     <View style={styles.stripeContainer}>
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
   stripe: {
     width: '100%',
     height: 55,
-    marginVertical: 20,
+    marginVertical: global.spacing.lg,
   }
 })
 

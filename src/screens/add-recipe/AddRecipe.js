@@ -1,9 +1,11 @@
-import { StyleSheet, View } from "react-native"
+import { View } from "react-native"
 import { AcmeText } from '@components'
+
+import global from "../../globals/styles"
 
 const AddRecipe = () => {
   return (
-    <View style={styles.container}>
+    <View style={global.elements.container}>
       <AcmeText
         style={{ fontSize: 50 }}
       >
@@ -12,14 +14,5 @@ const AddRecipe = () => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
 
 export default AddRecipe

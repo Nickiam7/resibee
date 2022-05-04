@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { resibeeAuth, resibeeFirestore } from '../config/firebase/config'
 import { useAuthContext } from './useAuthContext'
+import useFirebaseErrorMessage from './useFirebaseErrorMessage'
 
 const useLogin = () => {
   const [isCancelled, setIsCancelled] = useState(false)
-  const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
   const { dispatch } = useAuthContext()
+  const { loginErrorMessage, error, setError } = useFirebaseErrorMessage()
 
   const login = async (email, password) => {
     setError(null)
@@ -25,7 +26,7 @@ const useLogin = () => {
     }
     catch (err) {
       if (!isCancelled) {
-        setError(err.message)
+        loginErrorMessage(err.code)
         setIsPending(false)
       }
     }
