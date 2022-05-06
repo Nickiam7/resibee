@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import { Home, AddRecipe, Profile } from '@screens'
+import { global } from '@globals'
 
 const BottomTab = createBottomTabNavigator();
 
@@ -26,7 +27,7 @@ const BottomTabNavigation = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'tomato',
+        activeTintColor: global.colors.orange,
         inactiveTintColor: 'gray',
         showLabel: false
       }}

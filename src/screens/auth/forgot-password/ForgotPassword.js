@@ -1,30 +1,25 @@
-import { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import {
   ActivityIndicator,
   Alert,
   Keyboard,
   KeyboardAvoidingView,
-  Platform,
-  Text,
-  TouchableWithoutFeedback,
   View,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
+
 } from 'react-native'
 
-import { useLogin } from '@hooks'
-
 import {
-  AuthLinks,
   Button,
   GradientBackground,
   Input,
   Logo
 } from '@components'
 
-import { global } from '@globals'
+import { useForgotPassword } from '@hooks'
 
-const LogIn = ({ navigation }) => {
-  const { login, isPending, error } = useLogin()
+const ForgotPassword = () => {
+  const { forgotPassword, error, isPending } = useForgotPassword()
 
   const [form, setForm] = useState({
     email: '',
@@ -35,11 +30,9 @@ const LogIn = ({ navigation }) => {
     setForm({ ...form, [key]: value })
   }
 
-  const passwordRef = useRef(null)
-
   const handleSubmit = () => {
-    const { email, password } = form
-    login(email, password)
+    const { email } = form
+    forgotPassword(email)
   }
 
   return (
@@ -65,34 +58,14 @@ const LogIn = ({ navigation }) => {
               onChangeText={(value) => setFormInput('email', value)}
               keyboardType='email-address'
               placeholder='Email'
-              returnKeyType='next'
-              clearButtonMode='while-editing'
-              onSubmitEditing={() => {
-                passwordRef.current?.focus()
-              }}
-              blurOnSubmit={false}
-            />
-            <Input
-              ref={passwordRef}
-              value={form.password}
-              onChangeText={(value) => setFormInput('password', value)}
-              clearButtonMode='while-editing'
-              placeholder='Password'
-              secureTextEntry
               returnKeyType='done'
+              clearButtonMode='while-editing'
             />
-            <View style={{ alignItems: 'flex-end', paddingVertical: global.spacing.md }}>
-              <Text
-                onPress={() => navigation.navigate('ForgotPassword')}
-              >
-                Forgot password?
-              </Text>
-            </View>
             {!isPending &&
               <Button
                 onPress={handleSubmit}
               >
-                Login
+                Reset Password
               </Button>
             }
             {isPending &&
@@ -102,12 +75,6 @@ const LogIn = ({ navigation }) => {
                 />
               </Button>
             }
-            <AuthLinks
-              navigation={navigation}
-              linkTo='SignUp'
-            >
-              Need an account? Sign up
-            </AuthLinks>
             {error && isPending && Alert.alert('Sorry,', error)}
           </View>
         </KeyboardAvoidingView>
@@ -116,4 +83,4 @@ const LogIn = ({ navigation }) => {
   )
 }
 
-export default LogIn
+export default ForgotPassword

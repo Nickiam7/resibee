@@ -29,6 +29,7 @@ const Button = ({
 
 const styles = StyleSheet.create({
   button: {
+    alignItems: 'center',
     backgroundColor: global.colors.blue,
     marginTop: global.spacing.lg,
     paddingVertical: global.spacing.sm,

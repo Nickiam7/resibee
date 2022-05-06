@@ -10,10 +10,9 @@ const useLogin = () => {
   const { loginErrorMessage, error, setError } = useFirebaseErrorMessage()
 
   const login = async (email, password) => {
-    setError(null)
-    setIsPending(true)
 
     try {
+      setIsPending(true)
       const res = await resibeeAuth.signInWithEmailAndPassword(email, password)
       await resibeeFirestore.collection('users').doc(res.user.uid).update({ online: true })
 

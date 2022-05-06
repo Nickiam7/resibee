@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
 import { resibeeAuth, resibeeFirestore } from '../config/firebase/config'
 import { useAuthContext } from './useAuthContext'
+import useFirebaseErrorMessage from './useFirebaseErrorMessage'
 
 import { useNavigation } from '@react-navigation/native'
 
-export const useSignup = () => {
+const useSignup = () => {
   const [isCancelled, setIsCancelled] = useState(false)
-  const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
   const { dispatch } = useAuthContext()
+  const { signUpErrorMessage, error, setError } = useFirebaseErrorMessage()
   const navigation = useNavigation()
 
   const signup = async (email, password, displayName) => {
@@ -28,9 +29,10 @@ export const useSignup = () => {
         displayName,
       })
 
-      navigation.navigate('Home')
 
       dispatch({ type: 'LOGIN', payload: res.user })
+
+      navigation.navigate('Home')
 
       if (!isCancelled) {
         setIsPending(false)
@@ -39,7 +41,7 @@ export const useSignup = () => {
     }
     catch (err) {
       if (!isCancelled) {
-        setError(err.message)
+        signUpErrorMessage(err.code)
         setIsPending(false)
       }
     }
@@ -51,3 +53,5 @@ export const useSignup = () => {
 
   return { signup, error, isPending }
 }
+
+export default useSignup

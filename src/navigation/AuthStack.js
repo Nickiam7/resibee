@@ -1,8 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { LogIn, Profile, SignUp } from '@screens'
+import { ForgotPassword, LogIn, Profile, SignUp } from '@screens'
 
 import { useAuthContext } from '../hooks/useAuthContext'
+
+import { global } from '@globals'
 
 const Stack = createStackNavigator()
 
@@ -27,13 +29,29 @@ const AuthStackNavigation = () => {
             component={LogIn}
             options={{
               headerShown: false,
+              headerBackTitleVisible: false,
             }}
           />
           <Stack.Screen
             name='SignUp'
             component={SignUp}
             options={{
-              headerShown: false,
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: false,
+              headerTintColor: global.colors.blue,
+              headerBackTitleVisible: false,
+            }}
+          />
+          <Stack.Screen
+            name='ForgotPassword'
+            component={ForgotPassword}
+            options={{
+              headerShown: true,
+              headerTransparent: true,
+              headerTitle: false,
+              headerTintColor: global.colors.blue,
+              headerBackTitleVisible: false,
             }}
           />
         </>

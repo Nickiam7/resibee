@@ -5,7 +5,7 @@ import { StatusBar } from 'expo-status-bar'
 
 import StripedGradientBackground from './StripedGradientBackground'
 
-import global from '../../globals/styles'
+import { global } from '@globals'
 
 const GradientBackground = ({ children, striped }) => {
   return (

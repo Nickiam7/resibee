@@ -2,6 +2,7 @@ const global = {
   colors: {
     primary: '#2b2b2d',
     blue: '#252b45',
+    orange: '#f6981d'
   },
   font: {
     acme: 'Acme_400Regular',

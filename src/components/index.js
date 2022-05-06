@@ -1,5 +1,6 @@
 export { default as AcmeText } from './acme-text/AcmeText'
 export { default as AppRoot } from './app-root/AppRoot'
+export { default as AuthLinks } from './auth/AuthLinks'
 export { default as Button } from './button/Button'
 export { default as GradientBackground } from './gradient-background/GradientBackground'
 export { default as Input } from './form/Input'
