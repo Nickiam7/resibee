@@ -8,7 +8,6 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
-  TouchableOpacity,
 } from 'react-native'
 
 import { useLogin } from '@hooks'
@@ -67,10 +66,10 @@ const LogIn = ({ navigation }) => {
               placeholder='Email'
               returnKeyType='next'
               clearButtonMode='while-editing'
+              blurOnSubmit={false}
               onSubmitEditing={() => {
                 passwordRef.current?.focus()
               }}
-              blurOnSubmit={false}
             />
             <Input
               ref={passwordRef}

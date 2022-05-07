@@ -29,10 +29,7 @@ const useSignup = () => {
         displayName,
       })
 
-
       dispatch({ type: 'LOGIN', payload: res.user })
-
-      navigation.navigate('Home')
 
       if (!isCancelled) {
         setIsPending(false)
