@@ -4,7 +4,7 @@ import {
   TextInput
 } from "react-native"
 
-import global from '../../globals/styles'
+import { global } from '@globals'
 
 const Input = forwardRef(({ style, label, ...props }, ref) => {
   return (

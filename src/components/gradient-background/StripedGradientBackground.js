@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native'
 
-import global from '../../globals/styles'
+import { global } from '@globals'
 
 const StripedGradientBackground = () => {
   return (

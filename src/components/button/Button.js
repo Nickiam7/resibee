@@ -7,7 +7,7 @@ import global from '../../globals/styles'
 import AcmeText from '../acme-text/AcmeText'
 
 const Button = ({
-  children, buttonStyle, ...props
+  children, buttonStyle, textStyle, ...props
 }) => {
   return (
     <TouchableOpacity
@@ -19,7 +19,10 @@ const Button = ({
       {...props}
     >
       <AcmeText
-        style={styles.buttonText}
+        style={[
+          styles.buttonText,
+          textStyle
+        ]}
       >
         {children}
       </AcmeText>

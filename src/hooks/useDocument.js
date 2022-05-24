@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { resibeeFirestore } from '../config/firebase/config'
 
-export const useDocument = (collection, id) => {
+const useDocument = (collection, id) => {
   const [document, setDocument] = useState(null)
   const [error, setError] = useState(null)
 
@@ -27,3 +27,5 @@ export const useDocument = (collection, id) => {
 
   return { document, error }
 }
+
+export default useDocument

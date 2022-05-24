@@ -3,14 +3,11 @@ import { resibeeAuth, resibeeFirestore } from '../config/firebase/config'
 import { useAuthContext } from './useAuthContext'
 import useFirebaseErrorMessage from './useFirebaseErrorMessage'
 
-import { useNavigation } from '@react-navigation/native'
-
 const useSignup = () => {
   const [isCancelled, setIsCancelled] = useState(false)
   const [isPending, setIsPending] = useState(false)
   const { dispatch } = useAuthContext()
   const { signUpErrorMessage, error, setError } = useFirebaseErrorMessage()
-  const navigation = useNavigation()
 
   const signup = async (email, password, displayName) => {
     setError(null)
@@ -27,6 +24,7 @@ const useSignup = () => {
       await resibeeFirestore.collection('users').doc(res.user.uid).set({
         online: true,
         displayName,
+        // userID: res.user.uid,
       })
 
       dispatch({ type: 'LOGIN', payload: res.user })

@@ -9,7 +9,7 @@ const App = () => {
   return (
     <AuthContextProvider>
       <AppRoot>
-        <StatusBar style="auto" />
+        <StatusBar style="dark" />
         <AppNavigation />
       </AppRoot>
     </AuthContextProvider>

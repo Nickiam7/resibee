@@ -1,5 +1,5 @@
 import { Text } from 'react-native'
-import global from '../../globals/styles'
+import { global } from '@globals'
 
 const AcmeText = ({ children, style, ...props }) => {
   return (

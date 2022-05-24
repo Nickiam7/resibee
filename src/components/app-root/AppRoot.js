@@ -4,10 +4,13 @@ import {
   Acme_400Regular
 } from '@expo-google-fonts/acme'
 
+import { useAuthContext } from '../../hooks/useAuthContext'
+
 const AppRoot = ({ children }) => {
   const [fontLoaded] = useFonts({ Acme_400Regular })
+  const { authIsReady } = useAuthContext()
 
-  return fontLoaded ? (
+  return fontLoaded && authIsReady ? (
     <>
       {children}
     </>

@@ -22,6 +22,8 @@ const firestoreReducer = (state, action) => {
       return { isPending: false, document: null, success: true, error: null }
     case "UPDATED_DOCUMENT":
       return { isPending: false, document: action.payload, success: true, error: null }
+    case "ADDED_COLLECTION":
+      return { isPending: false, document: action.payload, success: true, error: null }
     case 'ERROR':
       return { isPending: false, document: null, success: false, error: action.payload }
     default:
@@ -29,7 +31,7 @@ const firestoreReducer = (state, action) => {
   }
 }
 
-export const useFirestore = (collection) => {
+const useFirestore = (collection) => {
   const [response, dispatch] = useReducer(firestoreReducer, initialState)
   const [isCancelled, setIsCancelled] = useState(false)
 
@@ -46,7 +48,13 @@ export const useFirestore = (collection) => {
 
     try {
       const createdAt = timestamp.fromDate(new Date())
-      const addedDocument = await ref.add({ ...doc, createdAt })
+
+      const addedDocument = await ref.doc(doc.uid).collection('recipes').add({ ...doc, createdAt })
+
+      if (doc.collection !== '' && doc.collection !== null) {
+        await ref.doc(doc.uid).collection('collection').doc(doc.collection).set({ name: doc.collection })
+        await ref.doc(doc.uid).collection('collection').doc(doc.collection).collection('recipes').doc(addedDocument.id).set({ ...doc, createdAt })
+      }
 
       const uploadPath = `recipes/${doc.uid}/${addedDocument.id}/${doc.title}`
       const blobs = doc.recipePhotos.map(async (photo, index) => {
@@ -58,9 +66,10 @@ export const useFirestore = (collection) => {
       })
       const allBlobs = await Promise.all(blobs)
 
-      await ref.doc(addedDocument.id).update({ ...doc, recipePhotos: allBlobs })
+      // await ref.doc(doc.uid).collection('recipes').doc(addedDocument.id).update({ ...doc, recipePhotos: allBlobs })
 
       dispatchIfNotCancelled({ type: 'ADDED_DOCUMENT', payload: addedDocument })
+      // dispatchIfNotCancelled({ type: 'ADDED_COLLECTION', payload: newCollection })
     }
     catch (err) {
       dispatchIfNotCancelled({ type: 'ERROR', payload: err.message })
@@ -101,3 +110,5 @@ export const useFirestore = (collection) => {
   return { addDocument, deleteDocument, updateDocument, response }
 
 }
+
+export default useFirestore
