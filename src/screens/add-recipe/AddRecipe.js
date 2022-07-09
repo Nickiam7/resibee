@@ -3,6 +3,7 @@ import { useState } from 'react'
 import {
   ScrollView,
   Text,
+  TouchableOpacity,
   View
 } from "react-native"
 
@@ -21,15 +22,12 @@ import { global } from '@globals'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { resibeeFirestore } from '../../config/firebase/config'
 import {
-  useDocument,
   useFirestore
 } from '@hooks'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const AddRecipe = () => {
   const { user } = useAuthContext()
   const { addDocument } = useFirestore('users')
-  const { document, error } = useDocument('users', user.uid)
 
   const [form, setForm] = useState({
     name: '',
@@ -56,18 +54,11 @@ const AddRecipe = () => {
   const showCollectionNew = () => {
     setToggleNewCollection(!toggleNewCollection)
     setToggleGetCollection(false)
-    if (toggleNewCollection === true && form.collection?.length > 0) {
-      setForm(form.collection = '')
-    }
   }
 
   const showCollectionGet = async () => {
     setToggleNewCollection(false)
     setToggleGetCollection(!toggleGetCollection)
-
-    if (toggleGetCollection === true && form.collection?.length > 0) {
-      setForm(form.collection = '')
-    }
 
     if (!toggleGetCollection) {
       resibeeFirestore.collection('users')
@@ -144,7 +135,7 @@ const AddRecipe = () => {
               textStyle={{ fontSize: 16 }}
               onPress={showCollectionNew}
             >
-              {toggleNewCollection ? 'Cancel' : 'Add' + '\n new collection'}
+              {toggleNewCollection ? 'Close' : 'Add' + '\n new collection'}
             </Button>
             <View
               style={{
@@ -181,7 +172,7 @@ const AddRecipe = () => {
               textStyle={{ fontSize: 16 }}
               onPress={showCollectionGet}
             >
-              {toggleGetCollection ? 'Cancel' : 'Select' + '\n from collections'}
+              {toggleGetCollection ? 'Close' : 'Select' + '\n from collections'}
             </Button>
           </View>
           {toggleNewCollection &&
@@ -199,7 +190,7 @@ const AddRecipe = () => {
                   value={form.collection}
                   onChangeText={(value) => setFormInput('collection', value)}
                   placeholder='Add collection name'
-                  clearButtonMode='while-editing'
+                  clearButtonMode='always'
                   style={{
                     width: '75%',
                     backgroundColor: '#ffffff',
@@ -234,7 +225,7 @@ const AddRecipe = () => {
                 borderRadius: global.elements.borderRadius,
                 marginTop: 4,
                 width: '75%',
-                height: '75%',
+                height: collections?.length > 5 ? 250 : null,
                 alignSelf: 'flex-end',
                 justifyContent: 'center',
               }]}

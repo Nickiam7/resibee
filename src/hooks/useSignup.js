@@ -24,7 +24,6 @@ const useSignup = () => {
       await resibeeFirestore.collection('users').doc(res.user.uid).set({
         online: true,
         displayName,
-        // userID: res.user.uid,
       })
 
       dispatch({ type: 'LOGIN', payload: res.user })

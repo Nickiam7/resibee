@@ -52,8 +52,27 @@ const useFirestore = (collection) => {
       const addedDocument = await ref.doc(doc.uid).collection('recipes').add({ ...doc, createdAt })
 
       if (doc.collection !== '' && doc.collection !== null) {
-        await ref.doc(doc.uid).collection('collection').doc(doc.collection).set({ name: doc.collection })
-        await ref.doc(doc.uid).collection('collection').doc(doc.collection).collection('recipes').doc(addedDocument.id).set({ ...doc, createdAt })
+
+        await ref.doc(doc.uid)
+          .collection('collection')
+          .doc(doc.collection)
+          .set(
+            {
+              name: doc.collection,
+              count: 0,
+
+            }
+          )
+        await ref.doc(doc.uid)
+          .collection('collection')
+          .doc(doc.collection)
+          .collection('recipes')
+          .doc(doc.id)
+          .set(
+            {
+              ...doc, createdAt
+            }
+          )
       }
 
       const uploadPath = `recipes/${doc.uid}/${addedDocument.id}/${doc.title}`
