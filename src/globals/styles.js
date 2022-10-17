@@ -23,7 +23,7 @@ const global = {
     shadowColor: '#171717',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
-    shadowRadius: 3,
+    shadowRadius: 7,
   },
   elements: {
     borderRadius: 10,
@@ -61,6 +61,12 @@ const global = {
     listItem: {
       borderBottomWidth: 1,
       borderBottomColor: 'rgba(0, 0, 0, 0.15)',
+    },
+    cardPadding: {
+      paddingTop: 12,
+      paddingRight: 12,
+      paddingBottom: 0,
+      paddingLeft: 12,
     }
   }
 }

@@ -1,14 +1,23 @@
-import { StyleSheet, View } from 'react-native'
+import {
+  Dimensions,
+  StyleSheet,
+  View
+} from 'react-native'
 
 import { global } from '@globals'
 
 const Card = ({ children, style, ...props }) => {
+
+  const width = Dimensions.get('window').width
+
   return (
     <View
-      style={[
-        styles.card,
-        style
-      ]}
+      style={
+        [
+          styles.card,
+          style,
+          global.shadowProp,
+        ]}
       {...props}
     >
       {children}
@@ -18,8 +27,9 @@ const Card = ({ children, style, ...props }) => {
 
 const styles = StyleSheet.create({
   card: {
-    paddingBottom: global.spacing.md,
-    marginVertical: global.spacing.md,
+    backgroundColor: '#ffffff',
+    borderRadius: global.elements.borderRadius,
+    marginVertical: global.spacing.md
   }
 })
 

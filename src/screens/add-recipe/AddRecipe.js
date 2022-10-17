@@ -79,7 +79,6 @@ const AddRecipe = () => {
       [
         global.elements.containerStart,
         global.elements.safeZone,
-        { paddingLeft: global.spacing.lg, paddingRight: global.spacing.lg }
       ]
     }>
       <View style={global.elements.containerFlexStart}>
@@ -92,26 +91,30 @@ const AddRecipe = () => {
       <ScrollView
         alwaysBounceVertical={false}
         nestedScrollEnabled={true}
-        contentContainerStyle={{ width: '100%', paddingTop: global.spacing.lg }}
+        contentContainerStyle={{ width: '100%', paddingTop: global.spacing.lg, paddingHorizontal: 25 }}
       >
         <Card>
           <Text
-            style={{
+            style={[global.elements.cardPadding,
+            {
               paddingLeft: global.spacing.sm
-            }}
+            }
+            ]}
           >
             Name
           </Text>
-          <Input
-            value={form.name}
-            onChangeText={(value) => setFormInput('name', value)}
-            placeholder='Add recipe name'
-            style={{
-              width: '100%',
-              backgroundColor: '#ffffff',
-              marginTop: global.spacing.xs,
-            }}
-          />
+          <View style={global.elements.cardPadding}>
+            <Input
+              value={form.name}
+              onChangeText={(value) => setFormInput('name', value)}
+              placeholder='Add recipe name'
+              style={{
+                width: '100%',
+                backgroundColor: '#ffffff',
+                marginTop: global.spacing.xs,
+              }}
+            />
+          </View>
         </Card>
         <Card>
           <Text
@@ -275,13 +278,16 @@ const AddRecipe = () => {
         </Card>
       </ScrollView>
       <Card
-        style={{
-          width: '100%',
-          paddingTop: global.spacing.sm,
-          marginTop: 0,
-          paddingBottom: global.spacing.sm,
-          marginBottom: 0
-        }}
+        style={[
+          global.elements.cardPadding,
+          {
+            width: '100%',
+            paddingBottom: global.spacing.md,
+            marginTop: 0,
+            marginBottom: 0,
+            backgroundColor: 'rgba(0,0,0,0)'
+          }
+        ]}
       >
         <Button
           onPress={handleSubmit}
@@ -290,7 +296,7 @@ const AddRecipe = () => {
           Add new recipe
         </Button>
       </Card>
-    </View>
+    </View >
   )
 }
 
